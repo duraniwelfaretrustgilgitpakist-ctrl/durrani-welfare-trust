@@ -21,18 +21,34 @@ interface Service {
 }
 
 const ICON_MAP: Record<string, React.ComponentType<{ size?: number }>> = {
-  home: Home,
-  baby: Baby,
-  'graduation-cap': GraduationCap,
-  ambulance: Truck,
-  users: Users,
-  droplets: Droplets,
-  heart: Heart,
-  gift: Gift,
-  tree: TreePine,
-  'tree-pine': TreePine,
-  mic: Mic,
-  volunteer: HandHeart,
+  home: Home, baby: Baby, 'graduation-cap': GraduationCap, ambulance: Truck,
+  users: Users, droplets: Droplets, heart: Heart, gift: Gift,
+  tree: TreePine, 'tree-pine': TreePine, mic: Mic, volunteer: HandHeart,
+};
+
+const PROGRAM_IMAGES: Record<string, string> = {
+  'orphanage-for-girls':        '/gallery/orphanage-girls.jpeg',
+  'infant-care-adoption':       '/gallery/infant-care.jpeg',
+  'education-programmes':       '/gallery/madrasa-building.jpeg',
+  'ambulance-services':         '/gallery/ambulance-fleet.jpeg',
+  'women-empowerment':          '/images/rawisa hub.jpeg',
+  'clean-water-infrastructure': '/images/water.jpeg',
+  'food-distribution':          '/images/qurbnai (2).jpeg',
+  'marriage-support':           '/images/marrigaes.jpeg',
+  'plantation-drive':           '/gallery/girls-certificates.jpeg',
+  'seminars-youth-empowerment': '/gallery/eve-vision-award.jpeg',
+};
+
+const PROGRAM_GALLERY: Record<string, string[]> = {
+  'food-distribution': [
+    '/images/qurbnai (2).jpeg',
+    '/images/qurbani (2).jpeg',
+    '/images/qurbnai.jpeg',
+    '/images/qurbani (3).jpeg',
+  ],
+  'marriage-support': ['/images/marrigaes.jpeg'],
+  'women-empowerment': ['/images/rawisa hub.jpeg', '/gallery/women-training.jpeg'],
+  'clean-water-infrastructure': ['/images/water.jpeg'],
 };
 
 export default function ServiceDetailPage() {
@@ -78,6 +94,8 @@ export default function ServiceDetailPage() {
   }
 
   const Icon = ICON_MAP[service.icon] ?? HelpCircle;
+  const mainImage = PROGRAM_IMAGES[service.slug];
+  const gallery = PROGRAM_GALLERY[service.slug] ?? (mainImage ? [mainImage] : []);
 
   return (
     <PublicLayout>
@@ -85,6 +103,7 @@ export default function ServiceDetailPage() {
         title={service.title}
         subtitle={service.short_description}
         breadcrumb={service.title}
+        image={mainImage}
       />
 
       <section className="section-padding bg-white">
@@ -117,6 +136,22 @@ export default function ServiceDetailPage() {
                 </p>
               ))}
           </div>
+
+          {/* Photo gallery */}
+          {gallery.length > 0 && (
+            <div className={`mt-10 grid gap-4 ${gallery.length === 1 ? 'grid-cols-1' : gallery.length === 2 ? 'grid-cols-2' : 'grid-cols-2 md:grid-cols-2'}`}>
+              {gallery.map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt={`${service.title} — photo ${i + 1}`}
+                  loading="lazy"
+                  className="w-full rounded-2xl object-cover shadow-soft"
+                  style={{ maxHeight: gallery.length === 1 ? '420px' : '280px' }}
+                />
+              ))}
+            </div>
+          )}
 
           <div className="mt-12 bg-gradient-to-r from-dwt-700 to-dwt-500 text-white rounded-2xl p-8 text-center">
             <h3 className="font-heading font-bold text-2xl mb-3">Get Involved</h3>

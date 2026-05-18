@@ -23,16 +23,16 @@ const ICON_MAP: Record<string, React.ComponentType<{ size?: number }>> = {
 };
 
 const PROGRAM_IMAGES: Record<string, string> = {
-  'orphanage-for-girls':       '/gallery/orphanage-girls.jpeg',
-  'infant-care-adoption':      '/gallery/infant-care.jpeg',
-  'education-programmes':      '/gallery/madrasa-building.jpeg',
-  'ambulance-services':        '/gallery/ambulance-fleet.jpeg',
-  'women-empowerment':         '/gallery/women-training.jpeg',
-  'clean-water-infrastructure':'/gallery/dwt-ambulance.jpeg',
-  'food-distribution':         '/gallery/food-distribution.jpeg',
-  'marriage-support':          '/gallery/marriage-support.jpeg',
-  'plantation-drive':          '/gallery/girls-certificates.jpeg',
-  'seminars-youth-empowerment':'/gallery/eve-vision-award.jpeg',
+  'orphanage-for-girls':        '/gallery/orphanage-girls.jpeg',
+  'infant-care-adoption':       '/gallery/infant-care.jpeg',
+  'education-programmes':       '/gallery/madrasa-building.jpeg',
+  'ambulance-services':         '/gallery/ambulance-fleet.jpeg',
+  'women-empowerment':          '/images/rawisa hub.jpeg',
+  'clean-water-infrastructure': '/images/water.jpeg',
+  'food-distribution':          '/images/qurbnai (2).jpeg',
+  'marriage-support':           '/images/marrigaes.jpeg',
+  'plantation-drive':           '/gallery/girls-certificates.jpeg',
+  'seminars-youth-empowerment': '/gallery/eve-vision-award.jpeg',
 };
 
 export default function ServicesSection() {

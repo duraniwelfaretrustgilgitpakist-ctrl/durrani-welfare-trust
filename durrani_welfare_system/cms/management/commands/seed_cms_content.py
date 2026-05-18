@@ -184,7 +184,7 @@ class Command(BaseCommand):
              'Ramadan rations to 3,000+ families since 2017. Eid clothing for 1,000+ children.',
              False, 7),
             ('Marriage Support for Orphan Girls', 'marriage-support', 'gift',
-             'Supporting orphan girls with wedding expenses, Jahez, and clothing for a dignified new beginning.',
+             'Durrani Welfare Trust supports the marriages of deserving and orphan girls by helping them start a dignified new life. The Trust provides wedding expenses, essential household items (Jahez), clothes, and other basic needs for marriage ceremonies. Through this initiative, many underprivileged girls receive support, care, and hope for a better future. The mission of the Trust is to reduce the financial burden on needy families and promote humanity, dignity, and community welfare through collective support and compassion.',
              False, 8),
             ('Plantation Drive', 'plantation-drive', 'tree-pine',
              'Community tree plantation drives in Gilgit-Baltistan promoting environmental conservation.',
