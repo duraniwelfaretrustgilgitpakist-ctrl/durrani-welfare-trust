@@ -98,9 +98,11 @@ ON_VERCEL = bool(os.environ.get('VERCEL', '') or os.environ.get('VERCEL_ENV', ''
 if DATABASE_URL:
     try:
         import dj_database_url
-        DATABASES = {'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)}
+        # conn_max_age=0: no connection reuse — required for serverless (Vercel/Neon)
+        DATABASES = {'default': dj_database_url.parse(DATABASE_URL, conn_max_age=0, ssl_require=True)}
+        DATABASES['default'].setdefault('OPTIONS', {})
+        DATABASES['default']['OPTIONS']['sslmode'] = 'require'
     except ImportError:
-        # Fallback: parse manually
         import re
         m = re.match(r'postgres(?:ql)?://(?P<user>[^:]+):(?P<pwd>[^@]+)@(?P<host>[^:/]+)(?::(?P<port>\d+))?/(?P<name>[^?]+)', DATABASE_URL)
         DATABASES = {

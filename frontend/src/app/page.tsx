@@ -11,10 +11,12 @@ import NewsSection from '@/components/sections/NewsSection';
 import GetInvolvedSection from '@/components/sections/GetInvolvedSection';
 import CTASection from '@/components/sections/CTASection';
 import PublicLayout from '@/components/PublicLayout';
+import BackendWarmup from '@/components/BackendWarmup';
 
 export default function HomePage() {
   return (
     <PublicLayout>
+      <BackendWarmup />
       <HeroSection />
       <AboutSection />
       <StatsSection />
