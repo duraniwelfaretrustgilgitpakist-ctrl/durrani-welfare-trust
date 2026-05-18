@@ -5,6 +5,7 @@ import { Mail, Phone, Award, Shield, Star, Heart } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
 import PublicLayout from '@/components/PublicLayout';
 import { publicApi, mediaUrl } from '@/lib/api';
+import { resolveTeamPhoto } from '@/lib/teamPhotos';
 
 interface TeamMember {
   id: number;
@@ -20,9 +21,7 @@ interface TeamMember {
 
 
 function PersonCard({ p }: { p: TeamMember }) {
-  const photoSrc = p.photo
-    ? (p.photo.startsWith('/') && !p.photo.startsWith('/media') ? p.photo : mediaUrl(p.photo))
-    : null;
+  const photoSrc = resolveTeamPhoto(p.name, p.photo, mediaUrl);
 
   return (
     <div className="bg-white rounded-2xl shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">

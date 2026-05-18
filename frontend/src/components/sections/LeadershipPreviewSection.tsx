@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Award, Shield } from 'lucide-react';
 import { publicApi, mediaUrl } from '@/lib/api';
+import { resolveTeamPhoto } from '@/lib/teamPhotos';
 
 interface Leader {
   id: number;
@@ -57,9 +58,7 @@ export default function LeadershipPreviewSection() {
           ) : (
             leaders.map((l) => {
               const initials = l.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase();
-              const photoSrc = l.photo
-                ? (l.photo.startsWith('/team/') ? l.photo : mediaUrl(l.photo))
-                : null;
+              const photoSrc = resolveTeamPhoto(l.name, l.photo, mediaUrl);
               return (
                 <div key={l.id} className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300 group">
                   <div className="relative bg-gradient-to-br from-dwt-700 to-dwt-500 py-10 flex flex-col items-center">
