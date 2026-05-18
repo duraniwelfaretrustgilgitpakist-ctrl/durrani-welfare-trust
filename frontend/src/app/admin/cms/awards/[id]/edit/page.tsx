@@ -17,7 +17,7 @@ export default function EditAwardPage() {
   useEffect(() => {
     if (!id) return;
     adminApi.awards.get(id).then((r) =>
-      reset({ ...r.data, current_image: r.data.image, image: undefined })
+      reset({ ...r.data, current_image: r.data.image, image: undefined, image_url: r.data.image_url || '' })
     );
   }, [id, reset]);
 
@@ -46,8 +46,13 @@ export default function EditAwardPage() {
         <Input label="Year" name="year" register={register} errors={errors} className="mt-5" />
         <Textarea label="Description" name="description" register={register} errors={errors} rows={4} className="mt-5" />
         <Input label="Display Order" name="order" type="number" register={register} errors={errors} className="mt-5" />
+        <div className="mt-5 p-4 rounded-xl border border-amber-200 bg-amber-50">
+          <label className="form-label text-amber-800">Image URL (Recommended)</label>
+          <p className="text-xs text-amber-700 mb-2">Paste a URL from Cloudinary, Imgur, or any image host. More reliable than file upload.</p>
+          <Input label="" name="image_url" register={register} errors={errors} placeholder="https://res.cloudinary.com/..." />
+        </div>
         <div className="mt-5">
-          <label className="form-label">Award Photo / Certificate</label>
+          <label className="form-label">Upload Photo / Certificate (optional)</label>
           {currentImage && <img src={mediaUrl(currentImage)} alt="" className="w-48 h-32 object-cover rounded mb-2" />}
           <input type="file" accept="image/*" {...register('image')} className="form-input" />
         </div>

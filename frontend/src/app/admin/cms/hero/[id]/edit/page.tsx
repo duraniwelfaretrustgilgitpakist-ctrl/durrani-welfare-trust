@@ -42,8 +42,14 @@ export default function EditHeroPage() {
         <Input label="Title" name="title" required register={register} errors={errors} />
         <Input label="Subtitle" name="subtitle" register={register} errors={errors} className="mt-5" />
         <Textarea label="Description" name="description" register={register} errors={errors} className="mt-5" />
+        <div className="mt-5 p-4 rounded-xl border border-amber-200 bg-amber-50">
+          <label className="form-label text-amber-800">Image URL (Recommended)</label>
+          <p className="text-xs text-amber-700 mb-2">Paste a URL from Cloudinary, Imgur, or any image host. This is the most reliable way to show images — uploaded files may be lost on server restart.</p>
+          <Input label="" name="image_url" register={register} errors={errors} placeholder="https://res.cloudinary.com/..." />
+        </div>
         <div className="mt-5">
-          <label className="form-label">Background Image</label>
+          <label className="form-label">Upload Image (optional)</label>
+          <p className="text-xs text-gray-500 mb-2">Only use this as a backup. Prefer the URL field above for reliable display.</p>
           {currentImage && <img src={mediaUrl(currentImage)} alt="" className="w-48 h-24 object-cover rounded mb-2" />}
           <input type="file" accept="image/*" {...register('background_image')} className="form-input" />
         </div>

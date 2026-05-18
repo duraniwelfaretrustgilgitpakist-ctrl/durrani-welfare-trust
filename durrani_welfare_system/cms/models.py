@@ -46,7 +46,8 @@ class HeroBanner(models.Model):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=400, blank=True)
     description = models.TextField(blank=True)
-    background_image = models.ImageField(upload_to='cms/hero/')
+    background_image = models.ImageField(upload_to='cms/hero/', blank=True)
+    image_url = models.URLField(blank=True, help_text='Paste an external image URL (e.g. from Cloudinary or Imgur). Use this instead of file upload for reliable hosting.')
     cta_primary_text = models.CharField(max_length=50, blank=True, default='Donate Now')
     cta_primary_link = models.CharField(max_length=200, blank=True, default='/donate')
     cta_secondary_text = models.CharField(max_length=50, blank=True, default='Volunteer')
@@ -380,6 +381,7 @@ class Award(models.Model):
     year = models.CharField(max_length=10, blank=True, help_text='e.g. 2025')
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='cms/awards/', blank=True, null=True)
+    image_url = models.URLField(blank=True, help_text='Paste an external image URL for the award photo or certificate.')
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 

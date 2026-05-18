@@ -10,15 +10,24 @@ interface AwardItem {
   year: string;
   description: string;
   image: string | null;
+  image_url: string;
 }
 
 const GRADIENTS = [
-  'from-green-600 to-green-700',
-  'from-purple-600 to-purple-700',
-  'from-blue-600 to-blue-700',
-  'from-dwt-600 to-dwt-800',
+  '#166534',
+  '#6b21a8',
+  '#1e40af',
+  '#0f3d22',
 ];
 const ICONS = [Shield, Star, Award, Trophy];
+
+function resolveImage(item: AwardItem): string | null {
+  if (item.image_url) return item.image_url;
+  if (item.image) {
+    return item.image.startsWith('http') ? item.image : mediaUrl(item.image);
+  }
+  return null;
+}
 
 export default function AwardsSection() {
   const [awards, setAwards] = useState<AwardItem[]>([]);
@@ -55,7 +64,7 @@ export default function AwardsSection() {
           <div className="grid md:grid-cols-3 gap-6">
             {[...Array(3)].map((_, i) => (
               <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-soft animate-pulse">
-                <div className="h-44 bg-gray-200" />
+                <div className="h-52 bg-gray-200" />
                 <div className="p-6 space-y-3">
                   <div className="h-5 bg-gray-200 rounded w-3/4" />
                   <div className="h-3 bg-gray-100 rounded w-full" />
@@ -68,27 +77,44 @@ export default function AwardsSection() {
           <div className="grid md:grid-cols-3 gap-6">
             {awards.map((award, i) => {
               const Icon = ICONS[i % ICONS.length];
-              const gradient = GRADIENTS[i % GRADIENTS.length];
-              const imgSrc = award.image
-                ? (award.image.startsWith('http') ? award.image : mediaUrl(award.image))
-                : null;
+              const bgColor = GRADIENTS[i % GRADIENTS.length];
+              const imgSrc = resolveImage(award);
               return (
                 <div key={award.id} className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-card transition-shadow">
-                  <div className={`relative h-44 bg-gradient-to-br ${gradient} overflow-hidden`}>
-                    {imgSrc && (
-                      <img src={imgSrc} alt={award.title} loading="lazy" className="w-full h-full object-cover opacity-30" />
-                    )}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-                      <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mb-2">
-                        <Icon size={28} />
+                  {/* Image or fallback icon block */}
+                  <div className="relative h-52 overflow-hidden">
+                    {imgSrc ? (
+                      <>
+                        <img
+                          src={imgSrc}
+                          alt={award.title}
+                          loading="lazy"
+                          className="w-full h-full object-cover"
+                        />
+                        {/* Subtle bottom overlay for org/year tag only */}
+                        <div className="absolute bottom-0 left-0 right-0 px-4 py-3" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)' }}>
+                          <span className="text-xs font-bold text-white">
+                            {award.organization}{award.organization && award.year ? ' · ' : ''}{award.year}
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center" style={{ backgroundColor: bgColor }}>
+                        <div className="w-16 h-16 rounded-full flex items-center justify-center mb-3" style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}>
+                          <Icon size={32} color="white" />
+                        </div>
+                        <span className="text-xs font-bold text-white px-3 py-1 rounded-full" style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}>
+                          {award.organization}{award.organization && award.year ? ' · ' : ''}{award.year}
+                        </span>
                       </div>
-                      <span className="text-xs font-bold bg-white/20 px-3 py-1 rounded-full">
-                        {award.organization} · {award.year}
-                      </span>
-                    </div>
+                    )}
                   </div>
+
                   <div className="p-6">
-                    <h3 className="font-heading font-bold text-lg mb-3">{award.title}</h3>
+                    <h3 className="font-heading font-bold text-lg mb-2">{award.title}</h3>
+                    {!imgSrc && award.organization && (
+                      <p className="text-xs font-semibold text-dwt-600 mb-2">{award.organization} · {award.year}</p>
+                    )}
                     {award.description && (
                       <p className="text-sm text-gray-600 leading-relaxed">{award.description}</p>
                     )}
