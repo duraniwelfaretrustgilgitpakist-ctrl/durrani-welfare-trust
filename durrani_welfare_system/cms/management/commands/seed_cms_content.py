@@ -338,16 +338,38 @@ class Command(BaseCommand):
         awards = [
             ('Pride of Pakistan Award by ISPR', 'ISPR',
              '2025',
-             'Awarded during the 78th Independence Day celebrations "Marka-e-Haq" for outstanding '
-             'humanitarian service and community welfare.', 1),
+             'Aman Faraz Durrani received the Pride of Pakistan Award by ISPR during the '
+             '78th Independence Day celebrations "Marka-e-Haq" for outstanding humanitarian '
+             'service and community welfare.', 1),
             ('International EVE Vision Award', 'Vision of Women & Sahiba Writing Squad',
              '2026',
              'Recognised as an inspiring woman leader with outstanding global achievement in '
              'humanitarian service and women empowerment.', 2),
+            ('ISPR Summer Internship 2025', 'Inter Services Public Relations (ISPR)',
+             '2025',
+             'Aman Faraz Durrani (Durrani Welfare Trust Gilgit) successfully completed the ISPR '
+             'Summer Internship Programme 2025 at the Inter Services Public Relations Directorate, '
+             'Hilal Road, Rawalpindi — 14 July to 22 August 2025. Signed by Lt. Gen. Ahmed Sharif '
+             'Chaudhry, Director General ISPR.', 3),
+            ('National Security Workshop Gilgit Baltistan', 'Force Command Northern Areas',
+             '2025',
+             'Aman Faraz Durrani (CEO Durrani Welfare Trust Gilgit) attended the National Security '
+             'Workshop Gilgit Baltistan, 10–14 November 2025, at Headquarters Force Command Northern '
+             'Areas, Gilgit. Signed by Major General Syed Imtiaz Hussain Gillani.', 4),
+            ('Women Shaping the Future — Distinguished Speaker', 'Vision of Women',
+             '2026',
+             'Aman Faraz Durrani recognised as a distinguished speaker at the "Women Shaping the '
+             'Future" webinar on 8 March 2026, for exceptional expertise, profound knowledge, and '
+             'outstanding presentation skills. Certificate presented by Vision of Women.', 5),
+            ('Youth-Led Civic Empowerment', 'Future Path',
+             '2026',
+             'Aman Faraz Durrani actively participated in the "Youth-Led Civic Empowerment" session '
+             'on 26 January 2026, organised by Future Path. Certificate signed by '
+             'Engr. Anas Khan, Director Future Path.', 6),
             ('UNICEF Safe Families Certification', 'UNICEF & Social Welfare Department',
              '2024',
              'Certified for Safe Children and Safe Families training programmes under the '
-             'Rawasia Waheed HUB.', 3),
+             'Rawasia Waheed HUB.', 7),
         ]
         for title, org, year, desc, order in awards:
             _, created = Award.objects.update_or_create(

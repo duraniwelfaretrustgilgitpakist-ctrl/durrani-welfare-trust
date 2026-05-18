@@ -5,7 +5,8 @@ import { Heart, Users, GraduationCap, Phone, ChevronDown } from 'lucide-react';
 import { publicApi, mediaUrl } from '@/lib/api';
 
 export default function HeroSection() {
-  const [bannerImage, setBannerImage] = useState<string | null>(null);
+  // Default to the real DWT photo — API can override with CMS image
+  const [bannerImage, setBannerImage] = useState('/hero/banner.jpeg');
 
   useEffect(() => {
     publicApi
@@ -14,7 +15,6 @@ export default function HeroSection() {
         const banners = res.data.results ?? res.data;
         const active = banners.find((b: any) => b.is_active) ?? banners[0];
         if (!active) return;
-        // Prefer image_url (external, persistent) over uploaded file
         if (active.image_url) {
           setBannerImage(active.image_url);
         } else if (active.background_image) {
@@ -95,23 +95,12 @@ export default function HeroSection() {
               {/* Decorative border frame */}
               <div className="absolute -inset-3 rounded-3xl" style={{ border: '2px solid rgba(156,213,180,0.15)' }} />
               <div className="absolute -inset-1.5 rounded-2xl" style={{ border: '1px solid rgba(156,213,180,0.1)' }} />
-              {bannerImage ? (
-                <img
-                  src={bannerImage}
-                  alt="Durrani Welfare Trust — Be-Saharon Ka Sahara"
-                  className="relative w-full rounded-2xl object-cover"
-                  style={{ aspectRatio: '4/3', boxShadow: '0 25px 60px rgba(0,0,0,0.5)' }}
-                />
-              ) : (
-                <div
-                  className="relative w-full rounded-2xl flex flex-col items-center justify-center"
-                  style={{ aspectRatio: '4/3', backgroundColor: '#114a29', boxShadow: '0 25px 60px rgba(0,0,0,0.5)' }}
-                >
-                  <div className="text-6xl mb-3">🕌</div>
-                  <div className="font-heading font-bold text-xl" style={{ color: '#9cd5b4' }}>Durrani Welfare Trust</div>
-                  <div className="text-sm mt-1" style={{ color: '#6dbf94' }}>Gilgit-Baltistan, Pakistan</div>
-                </div>
-              )}
+              <img
+                src={bannerImage}
+                alt="Durrani Welfare Trust — orphan girls with founder Waheed Faraz Durrani"
+                className="relative w-full rounded-2xl object-cover object-top"
+                style={{ aspectRatio: '3/4', boxShadow: '0 25px 60px rgba(0,0,0,0.5)' }}
+              />
               {/* Bottom label badge */}
               <div className="absolute bottom-4 left-4 right-4 rounded-xl px-4 py-3" style={{ backgroundColor: 'rgba(15,61,34,0.92)', border: '1px solid rgba(156,213,180,0.2)' }}>
                 <div className="font-heading font-bold text-sm" style={{ color: '#9cd5b4' }}>Durrani Welfare Trust</div>

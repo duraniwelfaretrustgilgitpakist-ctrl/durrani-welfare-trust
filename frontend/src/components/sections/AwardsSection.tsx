@@ -21,12 +21,22 @@ const GRADIENTS = [
 ];
 const ICONS = [Shield, Star, Award, Trophy];
 
+// Static images baked into the frontend public folder — always available
+const STATIC_AWARD_IMAGES: Record<string, string> = {
+  'International EVE Vision Award':               '/vision of women.jpeg',
+  'ISPR Summer Internship 2025':                  '/ispr summer intership.jpeg',
+  'National Security Workshop Gilgit Baltistan':  '/national security workshop baltistan.jpeg',
+  'Women Shaping the Future — Distinguished Speaker': '/women shaping the furture.jpeg',
+  'Youth-Led Civic Empowerment':                  '/youth led civic epowerement.jpeg',
+};
+
 function resolveImage(item: AwardItem): string | null {
   if (item.image_url) return item.image_url;
   if (item.image) {
     return item.image.startsWith('http') ? item.image : mediaUrl(item.image);
   }
-  return null;
+  // Fall back to static public images matched by award title
+  return STATIC_AWARD_IMAGES[item.title] ?? null;
 }
 
 export default function AwardsSection() {
