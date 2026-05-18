@@ -148,7 +148,7 @@ STATIC_ROOT = str(EXE_DIR / 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = str(DATA_DIR / 'media')
+MEDIA_ROOT = '/tmp/media' if ON_VERCEL else str(DATA_DIR / 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

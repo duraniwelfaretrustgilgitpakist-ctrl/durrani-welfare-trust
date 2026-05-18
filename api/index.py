@@ -5,6 +5,9 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'durrani_welfare_system.settings')
 
+# Ensure writable media directory exists on Vercel
+os.makedirs('/tmp/media', exist_ok=True)
+
 import django
 django.setup()
 

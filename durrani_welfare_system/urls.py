@@ -1,4 +1,5 @@
 """URL configuration for Durrani Welfare Trust Management System."""
+import os
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -22,5 +23,5 @@ urlpatterns = [
     path('salaries/', include('durrani_welfare_system.salaries.urls')),
 ]
 
-if settings.DEBUG:
+if settings.DEBUG or bool(os.environ.get('VERCEL', '') or os.environ.get('VERCEL_ENV', '')):
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
