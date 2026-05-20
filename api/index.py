@@ -44,9 +44,13 @@ def _initialize():
                 last_name='User', role='admin', phone='0300-1234567',
             )
 
-        # Only seed if the database is empty (fast check on PostgreSQL)
-        from durrani_welfare_system.cms.models import SiteSettings
-        if not SiteSettings.objects.filter(pk=1).exists():
+        # Seed if DB is empty OR if services are missing image_url (e.g. after adding the field)
+        from durrani_welfare_system.cms.models import SiteSettings, Service
+        needs_seed = (
+            not SiteSettings.objects.filter(pk=1).exists()
+            or Service.objects.filter(image_url='').exists()
+        )
+        if needs_seed:
             call_command('seed_cms_content', verbosity=0)
 
         _initialized = True
