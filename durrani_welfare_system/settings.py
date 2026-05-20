@@ -22,9 +22,24 @@ else:
 
 SECRET_KEY = os.environ.get('DWT_SECRET_KEY', 'django-insecure-change-this-in-production-dwt-2024-secret-key')
 
-DEBUG = os.environ.get('DWT_DEBUG', '1') == '1'
+ON_VERCEL_EARLY = bool(os.environ.get('VERCEL', '') or os.environ.get('VERCEL_ENV', ''))
+DEBUG = os.environ.get('DWT_DEBUG', '0' if ON_VERCEL_EARLY else '1') == '1'
 
 ALLOWED_HOSTS = ['*']
+
+# Vercel: trust the HTTPS proxy and allow CSRF from our domains
+CSRF_TRUSTED_ORIGINS = [
+    'https://dwt-backend.vercel.app',
+    'https://*.vercel.app',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
+if ON_VERCEL_EARLY:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    CSRF_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SAMESITE = 'Lax'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -93,7 +108,7 @@ WSGI_APPLICATION = 'durrani_welfare_system.wsgi.application'
 #   2. Vercel serverless without DB → ephemeral SQLite in /tmp
 #   3. Local development → SQLite in DATA_DIR
 DATABASE_URL = os.environ.get('DATABASE_URL', '').strip()
-ON_VERCEL = bool(os.environ.get('VERCEL', '') or os.environ.get('VERCEL_ENV', ''))
+ON_VERCEL = ON_VERCEL_EARLY
 
 if DATABASE_URL:
     try:
