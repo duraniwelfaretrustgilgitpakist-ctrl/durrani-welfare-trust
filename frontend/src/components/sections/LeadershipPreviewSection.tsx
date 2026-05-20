@@ -58,7 +58,7 @@ export default function LeadershipPreviewSection() {
           ) : (
             leaders.map((l) => {
               const initials = l.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase();
-              const photoSrc = resolveTeamPhoto(l.name, l.photo, mediaUrl);
+              const photoSrc = resolveTeamPhoto(l.name, l.role, l.photo, mediaUrl);
               return (
                 <div key={l.id} className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300 group">
                   <div className="relative bg-gradient-to-br from-dwt-700 to-dwt-500 py-10 flex flex-col items-center">

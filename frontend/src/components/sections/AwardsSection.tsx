@@ -23,13 +23,19 @@ const ICONS = [Shield, Star, Award, Trophy];
 
 // Static images baked into the frontend public folder — always available
 const STATIC_AWARD_IMAGES: Record<string, string> = {
-  'Pride of Pakistan Award by ISPR':              '/team/pride-of-pakistan-award.jpeg',
-  'International EVE Vision Award':               '/vision of women.jpeg',
-  'ISPR Summer Internship 2025':                  '/ispr summer intership.jpeg',
-  'National Security Workshop Gilgit Baltistan':  '/national security workshop baltistan.jpeg',
+  'Pride of Pakistan Award by ISPR':                  '/team/pride-of-pakistan-award.jpeg',
+  'International EVE Vision Award':                   '/vision of women.jpeg',
+  'National Security Workshop Gilgit Baltistan':      '/national security workshop baltistan.jpeg',
   'Women Shaping the Future — Distinguished Speaker': '/women shaping the furture.jpeg',
-  'Youth-Led Civic Empowerment':                  '/youth led civic epowerement.jpeg',
+  'Youth-Led Civic Empowerment':                      '/youth led civic epowerement.jpeg',
 };
+
+// Ceremony/event photos look better with cover; certificate documents look better with contain
+const CERTIFICATE_AWARDS = new Set([
+  'National Security Workshop Gilgit Baltistan',
+  'Women Shaping the Future — Distinguished Speaker',
+  'Youth-Led Civic Empowerment',
+]);
 
 function resolveImage(item: AwardItem): string | null {
   if (item.image_url) return item.image_url;
@@ -72,7 +78,7 @@ export default function AwardsSection() {
         </div>
 
         {loading ? (
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(3)].map((_, i) => (
               <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-soft animate-pulse">
                 <div className="h-52 bg-gray-200" />
@@ -85,7 +91,7 @@ export default function AwardsSection() {
             ))}
           </div>
         ) : (
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {awards.map((award, i) => {
               const Icon = ICONS[i % ICONS.length];
               const bgColor = GRADIENTS[i % GRADIENTS.length];
@@ -93,14 +99,14 @@ export default function AwardsSection() {
               return (
                 <div key={award.id} className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-card transition-shadow">
                   {/* Image or fallback icon block */}
-                  <div className="relative h-52 overflow-hidden">
+                  <div className="relative h-56 overflow-hidden bg-gray-50">
                     {imgSrc ? (
                       <>
                         <img
                           src={imgSrc}
                           alt={award.title}
                           loading="lazy"
-                          className="w-full h-full object-cover"
+                          className={`w-full h-full ${CERTIFICATE_AWARDS.has(award.title) ? 'object-contain p-3' : 'object-cover'}`}
                         />
                         {/* Subtle bottom overlay for org/year tag only */}
                         <div className="absolute bottom-0 left-0 right-0 px-4 py-3" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)' }}>

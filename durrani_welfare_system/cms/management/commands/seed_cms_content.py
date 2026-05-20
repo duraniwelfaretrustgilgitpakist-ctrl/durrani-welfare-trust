@@ -288,6 +288,14 @@ class Command(BaseCommand):
              'the cause of orphan girls and underprivileged families in Gilgit-Baltistan. The '
              'Rawasia Waheed HUB — our women empowerment centre — is named in her honour.',
              [], 3),
+            ('Vice Chairman', 'Vice Chairman', 'core',
+             'Serving as Vice Chairman of Durrani Welfare Trust, guiding the organisation\'s '
+             'strategic direction and welfare operations across Gilgit-Baltistan.',
+             [], 4),
+            ('General Secretary', 'General Secretary', 'core',
+             'Managing the day-to-day operations and administrative affairs of Durrani Welfare '
+             'Trust with dedication and commitment to the mission.',
+             [], 5),
         ]
         for name, role, cat, bio, badges, order in members:
             _, created = TeamMember.objects.update_or_create(
@@ -335,6 +343,12 @@ class Command(BaseCommand):
             self.stdout.write(f'  {"+" if created else "~"} stat/{label}')
 
     def _seed_awards(self):
+        # Remove awards that should no longer appear on the site
+        Award.objects.filter(title__in=[
+            'ISPR Summer Internship 2025',
+            'UNICEF Safe Families Certification',
+        ]).delete()
+
         awards = [
             ('Pride of Pakistan Award by ISPR', 'ISPR',
              '2025',
@@ -345,31 +359,21 @@ class Command(BaseCommand):
              '2026',
              'Recognised as an inspiring woman leader with outstanding global achievement in '
              'humanitarian service and women empowerment.', 2),
-            ('ISPR Summer Internship 2025', 'Inter Services Public Relations (ISPR)',
-             '2025',
-             'Aman Faraz Durrani (Durrani Welfare Trust Gilgit) successfully completed the ISPR '
-             'Summer Internship Programme 2025 at the Inter Services Public Relations Directorate, '
-             'Hilal Road, Rawalpindi — 14 July to 22 August 2025. Signed by Lt. Gen. Ahmed Sharif '
-             'Chaudhry, Director General ISPR.', 3),
             ('National Security Workshop Gilgit Baltistan', 'Force Command Northern Areas',
              '2025',
              'Aman Faraz Durrani (CEO Durrani Welfare Trust Gilgit) attended the National Security '
              'Workshop Gilgit Baltistan, 10–14 November 2025, at Headquarters Force Command Northern '
-             'Areas, Gilgit. Signed by Major General Syed Imtiaz Hussain Gillani.', 4),
+             'Areas, Gilgit. Signed by Major General Syed Imtiaz Hussain Gillani.', 3),
             ('Women Shaping the Future — Distinguished Speaker', 'Vision of Women',
              '2026',
              'Aman Faraz Durrani recognised as a distinguished speaker at the "Women Shaping the '
              'Future" webinar on 8 March 2026, for exceptional expertise, profound knowledge, and '
-             'outstanding presentation skills. Certificate presented by Vision of Women.', 5),
+             'outstanding presentation skills. Certificate presented by Vision of Women.', 4),
             ('Youth-Led Civic Empowerment', 'Future Path',
              '2026',
              'Aman Faraz Durrani actively participated in the "Youth-Led Civic Empowerment" session '
              'on 26 January 2026, organised by Future Path. Certificate signed by '
-             'Engr. Anas Khan, Director Future Path.', 6),
-            ('UNICEF Safe Families Certification', 'UNICEF & Social Welfare Department',
-             '2024',
-             'Certified for Safe Children and Safe Families training programmes under the '
-             'Rawasia Waheed HUB.', 7),
+             'Engr. Anas Khan, Director Future Path.', 5),
         ]
         for title, org, year, desc, order in awards:
             _, created = Award.objects.update_or_create(

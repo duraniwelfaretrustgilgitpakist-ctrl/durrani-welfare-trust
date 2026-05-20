@@ -21,7 +21,7 @@ interface TeamMember {
 
 
 function PersonCard({ p }: { p: TeamMember }) {
-  const photoSrc = resolveTeamPhoto(p.name, p.photo, mediaUrl);
+  const photoSrc = resolveTeamPhoto(p.name, p.role, p.photo, mediaUrl);
 
   return (
     <div className="bg-white rounded-2xl shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden">
