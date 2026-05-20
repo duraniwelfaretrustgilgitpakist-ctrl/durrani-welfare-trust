@@ -18,6 +18,7 @@ interface Service {
   full_description: string;
   icon: string;
   is_featured: boolean;
+  image_url?: string;
 }
 
 const ICON_MAP: Record<string, React.ComponentType<{ size?: number }>> = {
@@ -93,7 +94,7 @@ export default function ServiceDetailPage() {
   }
 
   const Icon = ICON_MAP[service.icon] ?? HelpCircle;
-  const mainImage = PROGRAM_IMAGES[service.slug];
+  const mainImage = service.image_url || PROGRAM_IMAGES[service.slug];
   const gallery = PROGRAM_GALLERY[service.slug] ?? (mainImage ? [mainImage] : []);
 
   return (

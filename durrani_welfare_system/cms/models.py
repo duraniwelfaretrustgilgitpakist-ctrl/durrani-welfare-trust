@@ -97,6 +97,7 @@ class Service(models.Model):
     full_description = models.TextField(blank=True)
     icon = models.CharField(max_length=50, blank=True, help_text='Icon class or emoji (e.g. heart, book)')
     image = models.ImageField(upload_to='cms/services/', blank=True, null=True)
+    image_url = models.CharField(max_length=500, blank=True, help_text='Static image path or external URL (e.g. /gallery/orphanage-girls.jpeg)')
     order = models.PositiveIntegerField(default=0)
     is_featured = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)

@@ -69,6 +69,7 @@ class Command(BaseCommand):
                 cta_primary_link='/donate',
                 cta_secondary_text='Volunteer',
                 cta_secondary_link='/volunteer',
+                image_url='/hero/banner.jpeg',
                 is_active=True,
             )
         self.stdout.write(f'  {"+" if created else "~"} hero banner')
@@ -164,42 +165,43 @@ class Command(BaseCommand):
         services = [
             ('Orphanage for Girls', 'orphanage-for-girls', 'home',
              'A safe home for over 50 orphan girls providing shelter, education, healthcare, and the warmth of family.',
-             True, 1),
+             True, 1, '/gallery/orphanage-girls.jpeg'),
             ('Infant Care & Adoption', 'infant-care-adoption', 'baby',
              'Compassionate care for abandoned newborns and a legal court-registered adoption programme.',
-             True, 2),
+             True, 2, '/gallery/infant-care.jpeg'),
             ('Education Programmes', 'education-programmes', 'graduation-cap',
              'Holistic early education — Toddler, Pre-School, and primary schooling in a nurturing environment.',
-             True, 3),
+             True, 3, '/gallery/madrasa-building.jpeg'),
             ('Free Ambulance Services', 'ambulance-services', 'ambulance',
              '24/7 free emergency ambulance. Over 5,000 patients served at zero cost. Call: 03129700108.',
-             True, 4),
+             True, 4, '/gallery/ambulance-fleet.jpeg'),
             ('Women Empowerment — Rawasia Waheed HUB', 'women-empowerment', 'users',
              'Skills training in sewing and embroidery enabling women to start home-based businesses.',
-             True, 5),
+             True, 5, '/images/rawisa hub.jpeg'),
             ('Clean Water & Infrastructure', 'clean-water-infrastructure', 'droplets',
              'Construction of water wells in remote Gilgit-Baltistan communities. 5 wells built so far.',
-             True, 6),
+             True, 6, '/images/water.jpeg'),
             ('Food Distribution & Ramadan Programme', 'food-distribution', 'heart',
              'Ramadan rations to 3,000+ families since 2017. Eid clothing for 1,000+ children.',
-             False, 7),
+             False, 7, '/images/qurbnai (2).jpeg'),
             ('Marriage Support for Orphan Girls', 'marriage-support', 'gift',
              'Durrani Welfare Trust supports the marriages of deserving and orphan girls by helping them start a dignified new life. The Trust provides wedding expenses, essential household items (Jahez), clothes, and other basic needs for marriage ceremonies. Through this initiative, many underprivileged girls receive support, care, and hope for a better future. The mission of the Trust is to reduce the financial burden on needy families and promote humanity, dignity, and community welfare through collective support and compassion.',
-             False, 8),
+             False, 8, '/images/marrigaes.jpeg'),
             ('Plantation Drive', 'plantation-drive', 'tree-pine',
              'Community tree plantation drives in Gilgit-Baltistan promoting environmental conservation.',
-             False, 9),
+             False, 9, ''),
             ('Seminars & Youth Empowerment', 'seminars-youth-empowerment', 'mic',
              'Motivational lectures and seminars for youth to encourage welfare and civic engagement.',
-             False, 10),
+             False, 10, '/youth led civic epowerement.jpeg'),
         ]
-        for title, slug, icon, desc, featured, order in services:
+        for title, slug, icon, desc, featured, order, img_url in services:
             _, created = Service.objects.update_or_create(
                 slug=slug,
                 defaults={
                     'title': title, 'short_description': desc,
                     'full_description': desc, 'icon': icon,
                     'order': order, 'is_featured': featured, 'is_active': True,
+                    'image_url': img_url,
                 }
             )
             self.stdout.write(f'  {"+" if created else "~"} service/{slug}')
@@ -354,33 +356,36 @@ class Command(BaseCommand):
              '2025',
              'Aman Faraz Durrani received the Pride of Pakistan Award by ISPR during the '
              '78th Independence Day celebrations "Marka-e-Haq" for outstanding humanitarian '
-             'service and community welfare.', 1),
+             'service and community welfare.', 1, '/team/pride-of-pakistan-award.jpeg'),
             ('International EVE Vision Award', 'Vision of Women & Sahiba Writing Squad',
              '2026',
              'Recognised as an inspiring woman leader with outstanding global achievement in '
-             'humanitarian service and women empowerment.', 2),
+             'humanitarian service and women empowerment.', 2, '/vision of women.jpeg'),
             ('National Security Workshop Gilgit Baltistan', 'Force Command Northern Areas',
              '2025',
              'Aman Faraz Durrani (CEO Durrani Welfare Trust Gilgit) attended the National Security '
              'Workshop Gilgit Baltistan, 10–14 November 2025, at Headquarters Force Command Northern '
-             'Areas, Gilgit. Signed by Major General Syed Imtiaz Hussain Gillani.', 3),
+             'Areas, Gilgit. Signed by Major General Syed Imtiaz Hussain Gillani.', 3,
+             '/national security workshop baltistan.jpeg'),
             ('Women Shaping the Future — Distinguished Speaker', 'Vision of Women',
              '2026',
              'Aman Faraz Durrani recognised as a distinguished speaker at the "Women Shaping the '
              'Future" webinar on 8 March 2026, for exceptional expertise, profound knowledge, and '
-             'outstanding presentation skills. Certificate presented by Vision of Women.', 4),
+             'outstanding presentation skills. Certificate presented by Vision of Women.', 4,
+             '/women shaping the furture.jpeg'),
             ('Youth-Led Civic Empowerment', 'Future Path',
              '2026',
              'Aman Faraz Durrani actively participated in the "Youth-Led Civic Empowerment" session '
              'on 26 January 2026, organised by Future Path. Certificate signed by '
-             'Engr. Anas Khan, Director Future Path.', 5),
+             'Engr. Anas Khan, Director Future Path.', 5, '/youth led civic epowerement.jpeg'),
         ]
-        for title, org, year, desc, order in awards:
+        for title, org, year, desc, order, img_url in awards:
             _, created = Award.objects.update_or_create(
                 title=title,
                 defaults={
                     'organization': org, 'year': year,
                     'description': desc, 'order': order, 'is_active': True,
+                    'image_url': img_url,
                 }
             )
             self.stdout.write(f'  {"+" if created else "~"} award/{title[:40]}')

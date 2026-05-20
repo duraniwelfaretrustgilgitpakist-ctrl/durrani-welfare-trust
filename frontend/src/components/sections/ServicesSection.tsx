@@ -14,6 +14,7 @@ interface Service {
   short_description: string;
   icon: string;
   is_featured: boolean;
+  image_url?: string;
 }
 
 const ICON_MAP: Record<string, React.ComponentType<{ size?: number }>> = {
@@ -81,7 +82,7 @@ export default function ServicesSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {display.map((service) => {
             const Icon = ICON_MAP[service.icon] ?? HelpCircle;
-            const photo = PROGRAM_IMAGES[service.slug];
+            const photo = service.image_url || PROGRAM_IMAGES[service.slug];
             return (
               <Link
                 key={service.id}
