@@ -23,7 +23,7 @@ else:
 SECRET_KEY = os.environ.get('DWT_SECRET_KEY', 'django-insecure-change-this-in-production-dwt-2024-secret-key')
 
 ON_VERCEL_EARLY = bool(os.environ.get('VERCEL', '') or os.environ.get('VERCEL_ENV', ''))
-DEBUG = os.environ.get('DWT_DEBUG', '0' if ON_VERCEL_EARLY else '1') == '1'
+DEBUG = os.environ.get('DWT_DEBUG', '1') == '1'
 
 ALLOWED_HOSTS = ['*']
 
