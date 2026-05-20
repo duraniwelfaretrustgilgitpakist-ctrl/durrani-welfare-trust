@@ -6,6 +6,9 @@ export const TEAM_PHOTOS: Record<string, string> = {
   'Mr. Waheed Faraz Durrani': '/team/chairman.jpeg',
   'Ms. Aman Faraz Durrani':   '/team/ceo.jpeg',
   'Ms. Rawasia Waheed':       '/team/chairperson.jpeg',
+  // Vice Chairman and General Secretary — update names to match DB entries
+  'Vice Chairman':            '/team/vice-chairman.jpeg',
+  'General Secretary':        '/team/general-secretary.jpeg',
 };
 
 export function resolveTeamPhoto(name: string, photo: string | null, mediaUrlFn: (p: string) => string): string | null {

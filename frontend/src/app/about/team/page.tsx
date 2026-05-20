@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Mail, Phone, Award, Shield, Star, Heart } from 'lucide-react';
+import { Mail, Phone, Award, Heart } from 'lucide-react';
 import PageHeader from '@/components/PageHeader';
 import PublicLayout from '@/components/PublicLayout';
 import { publicApi, mediaUrl } from '@/lib/api';
@@ -104,58 +104,6 @@ export default function TeamPage() {
           </div>
           <div className="grid sm:grid-cols-2 gap-6">
             {leadership.map((p) => <PersonCard key={p.id} p={p} />)}
-          </div>
-        </div>
-      </section>
-
-      {/* Pride of Pakistan Award Section */}
-      <section className="section-padding bg-dwt-800 text-white">
-        <div className="container-page max-w-5xl">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm font-semibold mb-5">
-                <Shield size={16} className="text-dwt-200" /> National Recognition
-              </div>
-              <h2 className="font-heading font-bold text-3xl md:text-4xl mb-4 leading-snug">
-                ISPR Pride of Pakistan Award
-              </h2>
-              <p className="text-gray-300 leading-relaxed mb-4">
-                On the occasion of Pakistan's 78th Independence Day (Operation Marka-e-Haq),
-                Ms. Aman Faraz Durrani was honoured with the prestigious <strong className="text-white">ISPR Pride of Pakistan Award</strong> for
-                outstanding service to orphan girls and underprivileged families in Gilgit-Baltistan.
-              </p>
-              <p className="text-gray-300 leading-relaxed mb-6">
-                This recognition by the Inter Services Public Relations reflects the Trust's commitment
-                to welfare work that touches the lives of thousands across the region.
-              </p>
-              <div className="grid grid-cols-3 gap-3">
-                {[
-                  { icon: Shield, label: 'ISPR', sub: 'Pride of Pakistan 2025' },
-                  { icon: Star,   label: 'EVE Vision', sub: 'International Award 2026' },
-                  { icon: Award,  label: 'UNICEF', sub: 'Safe Families Certified' },
-                ].map((a) => {
-                  const Icon = a.icon;
-                  return (
-                    <div key={a.label} className="bg-white/10 border border-white/10 rounded-xl p-3 text-center">
-                      <Icon size={18} className="text-dwt-200 mx-auto mb-1.5" />
-                      <div className="text-xs font-bold text-white">{a.label}</div>
-                      <div className="text-xs text-gray-400 mt-0.5 leading-tight">{a.sub}</div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="relative">
-              <img
-                src="/team/pride-of-pakistan-award.jpeg"
-                alt="ISPR Pride of Pakistan Award - Aman Faraz Durrani"
-                className="rounded-2xl shadow-card w-full object-cover max-h-80"
-              />
-              <div className="absolute bottom-4 left-4 right-4 bg-dwt-900/80 backdrop-blur rounded-xl p-3 text-center text-sm">
-                <div className="font-semibold text-white">78th Independence Day Ceremony</div>
-                <div className="text-dwt-200 text-xs mt-0.5">Operation Marka-e-Haq — August 2025</div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
