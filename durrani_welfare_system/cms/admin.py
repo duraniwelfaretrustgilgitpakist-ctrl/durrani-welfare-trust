@@ -5,6 +5,7 @@ from .models import (
     NewsPost, GalleryAlbum, GalleryImage, DonationCampaign,
     ContactMessage, NewsletterSubscriber,
     StudentApplication, VolunteerApplication, PublicDonation,
+    TeamMember, Testimonial, Statistic, Award,
 )
 
 
@@ -98,3 +99,32 @@ class PublicDonationAdmin(admin.ModelAdmin):
     list_filter = ('status', 'category', 'payment_method')
     search_fields = ('donor_name', 'email', 'reference_number')
     readonly_fields = ('submitted_at', 'updated_at')
+
+
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = ('name', 'role', 'category', 'order', 'is_active')
+    list_filter = ('category', 'is_active')
+    list_editable = ('order', 'is_active')
+    search_fields = ('name', 'role')
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ('name', 'role', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    search_fields = ('name', 'quote')
+
+
+@admin.register(Statistic)
+class StatisticAdmin(admin.ModelAdmin):
+    list_display = ('label', 'value', 'icon', 'order', 'is_active')
+    list_editable = ('value', 'order', 'is_active')
+
+
+@admin.register(Award)
+class AwardAdmin(admin.ModelAdmin):
+    list_display = ('title', 'organization', 'year', 'order', 'is_active')
+    list_filter = ('is_active',)
+    list_editable = ('order', 'is_active')
+    search_fields = ('title', 'organization')
