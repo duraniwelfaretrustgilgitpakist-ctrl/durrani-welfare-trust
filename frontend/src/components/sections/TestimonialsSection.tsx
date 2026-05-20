@@ -71,7 +71,7 @@ export default function TestimonialsSection() {
               const initials = t.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase();
               const color = COLORS[i % COLORS.length];
               return (
-                <div key={t.id} className="rounded-2xl p-6" style={{ backgroundColor: '#114a29' }}>
+                <div key={t.id} className="rounded-2xl p-6 hover:-translate-y-1 transition-transform duration-300" style={{ backgroundColor: '#114a29' }}>
                   <Quote className="text-dwt-300 mb-4" size={32} />
                   <p className="text-gray-200 leading-relaxed mb-6 italic text-sm">"{t.quote}"</p>
                   <div className="flex items-center gap-3 pt-4 border-t border-dwt-600">
