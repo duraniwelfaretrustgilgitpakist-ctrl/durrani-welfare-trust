@@ -1,5 +1,11 @@
 """Django admin for CMS models."""
 from django.contrib import admin
+
+# "View Site" button in the admin header links to the live frontend
+admin.site.site_url = 'https://durrani-welfare-trust.vercel.app'
+admin.site.site_header = 'Durrani Welfare Trust'
+admin.site.site_title = 'DWT Admin'
+admin.site.index_title = 'Content Management'
 from .models import (
     SiteSettings, HeroBanner, AboutSection, Service,
     NewsPost, GalleryAlbum, GalleryImage, DonationCampaign,
