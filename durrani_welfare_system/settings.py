@@ -27,7 +27,9 @@ DEBUG = os.environ.get('DWT_DEBUG', '1') == '1'
 
 ALLOWED_HOSTS = ['*']
 
-# Vercel: trust the HTTPS proxy and allow CSRF from our domains
+# Vercel serverless: store CSRF token in the session (database) instead of a cookie
+# This is the most reliable approach on multi-instance serverless deployments
+CSRF_USE_SESSIONS = True
 CSRF_TRUSTED_ORIGINS = [
     'https://dwt-backend.vercel.app',
     'https://*.vercel.app',
