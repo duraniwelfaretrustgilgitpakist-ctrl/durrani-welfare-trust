@@ -35,8 +35,7 @@ const PROGRAM_IMAGES: Record<string, string> = {
   'clean-water-infrastructure': '/images/water.jpeg',
   'food-distribution':          '/images/qurbnai (2).jpeg',
   'marriage-support':           '/images/marrigaes.jpeg',
-  'plantation-drive':           '/gallery/girls-certificates.jpeg',
-  'seminars-youth-empowerment': '/gallery/eve-vision-award.jpeg',
+  'seminars-youth-empowerment': '/youth led civic epowerement.jpeg',
 };
 
 const PROGRAM_GALLERY: Record<string, string[]> = {

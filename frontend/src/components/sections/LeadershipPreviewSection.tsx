@@ -63,7 +63,7 @@ export default function LeadershipPreviewSection() {
                 <div key={l.id} className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-card hover:-translate-y-1 transition-all duration-300 group">
                   <div className="relative bg-gradient-to-br from-dwt-700 to-dwt-500 py-10 flex flex-col items-center">
                     {photoSrc ? (
-                      <img src={photoSrc} alt={l.name} loading="lazy" className="w-28 h-28 rounded-full object-cover shadow-card border-4 border-white/90" />
+                      <img src={photoSrc} alt={l.name} loading="lazy" className="w-28 h-28 rounded-full object-cover object-center shadow-card border-4 border-white/90" />
                     ) : (
                       <div className="w-28 h-28 rounded-full bg-white/95 text-dwt-700 flex items-center justify-center font-heading font-bold text-3xl shadow-card">
                         {initials}

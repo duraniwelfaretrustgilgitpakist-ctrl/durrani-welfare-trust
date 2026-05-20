@@ -23,6 +23,7 @@ const ICONS = [Shield, Star, Award, Trophy];
 
 // Static images baked into the frontend public folder — always available
 const STATIC_AWARD_IMAGES: Record<string, string> = {
+  'Pride of Pakistan Award by ISPR':              '/team/pride-of-pakistan-award.jpeg',
   'International EVE Vision Award':               '/vision of women.jpeg',
   'ISPR Summer Internship 2025':                  '/ispr summer intership.jpeg',
   'National Security Workshop Gilgit Baltistan':  '/national security workshop baltistan.jpeg',

@@ -98,7 +98,7 @@ export default function HeroSection() {
               <img
                 src={bannerImage}
                 alt="Durrani Welfare Trust — orphan girls with founder Waheed Faraz Durrani"
-                className="relative w-full rounded-2xl object-cover object-top"
+                className="relative w-full rounded-2xl object-cover object-center"
                 style={{ aspectRatio: '3/4', boxShadow: '0 25px 60px rgba(0,0,0,0.5)' }}
               />
               {/* Bottom label badge */}
