@@ -28,7 +28,7 @@ function PersonCard({ p }: { p: TeamMember }) {
       <div className="bg-gradient-to-br from-dwt-700 to-dwt-500 pt-8 pb-6 px-4 text-center flex-shrink-0">
         <div className="w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-white/90 shadow-card bg-white/20">
           {photoSrc ? (
-            <img src={photoSrc} alt={p.name} loading="lazy" className="w-full h-full object-cover object-center" />
+            <img src={photoSrc} alt={p.name} loading="lazy" className="w-full h-full object-cover object-top" />
           ) : (
             <div className="w-full h-full flex items-center justify-center font-heading font-bold text-2xl text-white">
               {p.name.split(' ').map(w => w[0]).join('').slice(0, 2)}

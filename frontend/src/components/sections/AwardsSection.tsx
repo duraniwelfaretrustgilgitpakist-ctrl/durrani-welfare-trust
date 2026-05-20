@@ -99,21 +99,23 @@ export default function AwardsSection() {
               return (
                 <div key={award.id} className="bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-card transition-shadow">
                   {/* Image or fallback icon block */}
-                  <div className="relative h-56 overflow-hidden bg-gray-50">
+                  <div className={`relative overflow-hidden ${CERTIFICATE_AWARDS.has(award.title) ? 'bg-white' : 'bg-gray-100'}`}
+                       style={{ height: CERTIFICATE_AWARDS.has(award.title) ? 'auto' : '224px' }}>
                     {imgSrc ? (
                       <>
                         <img
                           src={imgSrc}
                           alt={award.title}
                           loading="lazy"
-                          className={`w-full h-full ${CERTIFICATE_AWARDS.has(award.title) ? 'object-contain p-3' : 'object-cover'}`}
+                          className={`w-full ${CERTIFICATE_AWARDS.has(award.title) ? 'object-contain max-h-64' : 'h-full object-cover object-center'}`}
                         />
-                        {/* Subtle bottom overlay for org/year tag only */}
+                        {!CERTIFICATE_AWARDS.has(award.title) && (
                         <div className="absolute bottom-0 left-0 right-0 px-4 py-3" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)' }}>
                           <span className="text-xs font-bold text-white">
                             {award.organization}{award.organization && award.year ? ' · ' : ''}{award.year}
                           </span>
                         </div>
+                        )}
                       </>
                     ) : (
                       <div className="w-full h-full flex flex-col items-center justify-center" style={{ backgroundColor: bgColor }}>
@@ -127,13 +129,13 @@ export default function AwardsSection() {
                     )}
                   </div>
 
-                  <div className="p-6">
-                    <h3 className="font-heading font-bold text-lg mb-2">{award.title}</h3>
-                    {!imgSrc && award.organization && (
+                  <div className="p-5">
+                    <h3 className="font-heading font-bold text-base mb-1 leading-snug">{award.title}</h3>
+                    {award.organization && (
                       <p className="text-xs font-semibold text-dwt-600 mb-2">{award.organization} · {award.year}</p>
                     )}
                     {award.description && (
-                      <p className="text-sm text-gray-600 leading-relaxed">{award.description}</p>
+                      <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">{award.description}</p>
                     )}
                   </div>
                 </div>
