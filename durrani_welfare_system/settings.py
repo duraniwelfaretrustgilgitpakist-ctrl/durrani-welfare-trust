@@ -70,7 +70,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'durrani_welfare_system.middleware.AdminCsrfMiddleware',
+    # CsrfViewMiddleware removed — API uses JWT (CSRF-immune), admin protected by SameSite=Lax cookie
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
