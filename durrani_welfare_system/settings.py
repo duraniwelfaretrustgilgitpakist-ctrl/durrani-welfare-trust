@@ -27,9 +27,6 @@ DEBUG = os.environ.get('DWT_DEBUG', '1') == '1'
 
 ALLOWED_HOSTS = ['*']
 
-# Vercel serverless: store CSRF token in the session (database) instead of a cookie
-# This is the most reliable approach on multi-instance serverless deployments
-CSRF_USE_SESSIONS = True
 CSRF_TRUSTED_ORIGINS = [
     'https://dwt-backend.vercel.app',
     'https://*.vercel.app',
@@ -73,7 +70,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'durrani_welfare_system.middleware.AdminCsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
