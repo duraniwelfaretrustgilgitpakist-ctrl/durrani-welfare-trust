@@ -1,11 +1,29 @@
 """Django admin for CMS models."""
 from django.contrib import admin
+from django.contrib.admin import AdminSite
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
-# "View Site" button in the admin header links to the live frontend
-admin.site.site_url = 'https://durrani-welfare-trust.vercel.app'
-admin.site.site_header = 'Durrani Welfare Trust'
-admin.site.site_title = 'DWT Admin'
-admin.site.index_title = 'Content Management'
+
+class DWTAdminSite(AdminSite):
+    """Custom admin site — CSRF-exempt for Vercel serverless compatibility."""
+    site_header = 'Durrani Welfare Trust'
+    site_title = 'DWT Admin'
+    index_title = 'Content Management'
+    site_url = 'https://durrani-welfare-trust.vercel.app'
+
+    def admin_view(self, view, cacheable=False):
+        # Mark every admin view csrf_exempt so @csrf_protect is skipped
+        view.csrf_exempt = True
+        return super().admin_view(view, cacheable)
+
+    @method_decorator(csrf_exempt)
+    def login(self, request, extra_context=None):
+        return super().login(request, extra_context)
+
+
+# Swap the class of the existing admin.site so all registered models keep working
+admin.site.__class__ = DWTAdminSite
 from .models import (
     SiteSettings, HeroBanner, AboutSection, Service,
     NewsPost, GalleryAlbum, GalleryImage, DonationCampaign,
