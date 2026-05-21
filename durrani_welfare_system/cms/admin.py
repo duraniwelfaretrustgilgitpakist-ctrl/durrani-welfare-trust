@@ -1,8 +1,7 @@
 """Django admin for CMS models."""
+import functools
 from django.contrib import admin
 from django.contrib.admin import AdminSite
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
 
 
 class DWTAdminSite(AdminSite):
@@ -13,16 +12,16 @@ class DWTAdminSite(AdminSite):
     site_url = 'https://durrani-welfare-trust.vercel.app'
 
     def admin_view(self, view, cacheable=False):
-        # Mark every admin view csrf_exempt so @csrf_protect is skipped
-        view.csrf_exempt = True
-        return super().admin_view(view, cacheable)
+        # Wrap in a plain function so we can set csrf_exempt on it.
+        # (Bound methods don't allow attribute assignment, which caused 500s.)
+        @functools.wraps(view)
+        def exempt_view(*args, **kwargs):
+            return view(*args, **kwargs)
+        exempt_view.csrf_exempt = True
+        return super().admin_view(exempt_view, cacheable)
 
-    @method_decorator(csrf_exempt)
-    def login(self, request, extra_context=None):
-        return super().login(request, extra_context)
 
-
-# Swap the class of the existing admin.site so all registered models keep working
+# Swap the class so all already-registered models keep working
 admin.site.__class__ = DWTAdminSite
 from .models import (
     SiteSettings, HeroBanner, AboutSection, Service,
